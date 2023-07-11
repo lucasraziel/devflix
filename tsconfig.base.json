@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "incremental": true,
+        "target": "es2021",
+        "module": "ES2020",
+        "declaration": true,
+        "sourceMap": true,
+        "rootDir": "src",
+        "strict": true,
+        "moduleResolution": "node",
+        "noImplicitOverride": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "declarationMap": true,
+        "composite": true
+    }
+}

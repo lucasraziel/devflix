@@ -1,13 +1,16 @@
 {
-  "name": "@bilibios/video-adapter",
+  "name": "@devflix/video-adapter",
   "version": "0.0.1",
+  "type": "module",
   "description": "Video Adapter for DevFlix Server",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "lucasraziel",
-  "license": "GNU AGPLv3"
+  "license": "GNU AGPLv3",
+  "dependencies": {
+    "@devflix/core": "^0.0.1"
+  }
 }

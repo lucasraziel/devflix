@@ -1,8 +1,20 @@
 {
-  "name": "@bilibios/core",
+  "name": "@devflix/core",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./test/*": "./dist/test/*.js"
+  },
+  "typesVersions": {
+    "*": {
+      "test/*": [
+        "dist/test/*"
+      ]
+    }
+  },
   "version": "0.0.1",
-  "description": "Core Server for DevFlix Project",
-  "main": "index.js",
+  "description": "Core Domain for DevFlix Project",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
