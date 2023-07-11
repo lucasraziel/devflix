@@ -4,16 +4,23 @@
   "description": "MonoRepo for DevFlix Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build",
+    "start:video-adapter": "node packages/video-adapter",
+    "dev:adapter": "nodemon -e ts --exec \"npm run build && npm run start:video-adapter\"",
+    "start:video-catalog": "node packages/video-adapter",
+    "dev:catalog": "nodemon -e ts --exec \"npm run build && npm run start:video-catalog\""
   },
   "keywords": [],
   "author": "lucasraziel",
   "license": "GNU AGPLv3",
   "workspaces": [
     "packages/core",
-    "packages/video-adapter"
+    "packages/video-adapter",
+    "packages/video-catalog"
   ],
   "devDependencies": {
+    "nodemon": "^3.0.1",
     "typescript": "^5.1.6"
   }
 }

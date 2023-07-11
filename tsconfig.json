@@ -6,6 +6,9 @@
         },
         {
             "path": "packages/video-adapter/tsconfig.json"
+        },
+        {
+            "path": "packages/video-catalog/tsconfig.json"
         }
     ]
 }
