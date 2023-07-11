@@ -1,0 +1,16 @@
+{
+  "name": "devflix",
+  "version": "0.0.1",
+  "description": "MonoRepo for DevFlix Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lucasraziel",
+  "license": "GNU AGPLv3",
+  "workspaces": [
+    "packages/core",
+    "packages/video-adapter"
+  ]
+}

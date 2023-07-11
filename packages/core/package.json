@@ -1,0 +1,12 @@
+{
+  "name": "@bilibios/core",
+  "version": "0.0.1",
+  "description": "Core Server for DevFlix Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GNU AGPLv3"
+}
