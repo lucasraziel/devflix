@@ -1,5 +1,5 @@
-const run = () =>{
-    console.log('imported from core')
-}
+import sum from './test/index.js';
 
-export default run;
+const add2 = (a: number) => sum(a, 2);
+
+export default add2;

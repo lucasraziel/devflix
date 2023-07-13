@@ -1,8 +1,9 @@
 {
   "name": "@devflix/video-catalog",
   "version": "1.0.0",
+  "type": "module",
   "description": "Video Catalog Server for DevFlix",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

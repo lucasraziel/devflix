@@ -1,6 +1,8 @@
-import run from '@devflix/core';
-import runFromTest from '@devflix/core/test/index';
+import sum from '@devflix/core/test/index';
 
-run();
+const convertSumToString = (a: number) => {
+    const b = sum(a, 2);
+    return b.toString();
+}
 
-runFromTest();
+export default convertSumToString;

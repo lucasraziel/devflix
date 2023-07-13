@@ -1,5 +1,3 @@
-const runFromTest = () => {
-    console.log('runFromTest');
-}
+const sum = (a: number, b: number) => a + b;
 
-export default runFromTest;
+export default sum;

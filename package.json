@@ -4,11 +4,14 @@
   "description": "MonoRepo for DevFlix Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run build && npm run test:core && npm run test:adapter && npm run test:catalog",
+    "test:catalog": "NODE_V8_COVERAGE=coverage/catalog node --experimental-specifier-resolution=node --experimental-test-coverage --test  packages/video-catalog",
+    "test:adapter": "NODE_V8_COVERAGE=coverage/adapter node --experimental-test-coverage --test packages/video-adapter ",
+    "test:core": "NODE_V8_COVERAGE=coverage/core node --experimental-test-coverage --test packages/core ",
     "build": "tsc --build",
     "start:video-adapter": "node packages/video-adapter",
     "dev:adapter": "nodemon -e ts --exec \"npm run build && npm run start:video-adapter\"",
-    "start:video-catalog": "node packages/video-adapter",
+    "start:video-catalog": "node packages/video-catalog",
     "dev:catalog": "nodemon -e ts --exec \"npm run build && npm run start:video-catalog\""
   },
   "keywords": [],
@@ -20,6 +23,7 @@
     "packages/video-catalog"
   ],
   "devDependencies": {
+    "@types/node": "^20.4.2",
     "nodemon": "^3.0.1",
     "typescript": "^5.1.6"
   }

@@ -3,10 +3,14 @@
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
+    "./test": "./dist/test/index.js",
     "./test/*": "./dist/test/*.js"
   },
   "typesVersions": {
     "*": {
+      "test": [
+        "dist/test/index.d.ts"
+      ],
       "test/*": [
         "dist/test/*"
       ]
