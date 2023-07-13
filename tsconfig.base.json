@@ -15,5 +15,8 @@
         "forceConsistentCasingInFileNames": true,
         "declarationMap": true,
         "composite": true
-    }
+    },
+    "exclude": [
+        "dist"
+    ]
 }

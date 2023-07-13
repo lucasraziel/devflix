@@ -1,6 +1,6 @@
 import sum from '@devflix/core/test';
 
-const convertSumToString = (a: number) => {
+const convertSumToString = (a: number):string => {
     const b = sum(a, 2);
     return b.toString();
 }
