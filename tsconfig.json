@@ -2,7 +2,7 @@
     "files": [],
     "references": [
         {
-            "path": "packages/core/tsconfig.json"
+            "path": "packages/shared/tsconfig.json"
         },
         {
             "path": "packages/video-adapter/tsconfig.json"
