@@ -23,8 +23,10 @@ module.exports = {
         "project": ["./tsconfig.json", "./packages/*/tsconfig.json"]
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
+        "prettier/prettier": "error",
     }
 }
