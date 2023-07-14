@@ -36,7 +36,22 @@ const divideBy4 = async (
     fileDestin,
   ]);
 
+const generateSnapshot = async (
+  fileOrigin: string,
+  namePattern: string
+): Promise<{ stdout: string; stderr: string }> =>
+  await ffmpeg([
+    '-i',
+    fileOrigin,
+    '-vf',
+    "select='not(mod(t\\,10))'",
+    '-vsync',
+    'vfr',
+    namePattern,
+  ]);
+
 ffmpeg.divideBy2 = divideBy2;
 ffmpeg.divideBy4 = divideBy4;
+ffmpeg.generateSnapshot = generateSnapshot;
 
 export default ffmpeg;

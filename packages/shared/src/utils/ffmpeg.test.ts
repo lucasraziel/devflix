@@ -32,9 +32,18 @@ describe('ffmpeg', () => {
     const { width, height } = await ffprobe.getResolution(
       resolve(rootDir, 'test', 'video-4.mp4')
     );
-    console.log(width, height);
     assert.strictEqual(width, 960);
     assert.strictEqual(height, 540);
     await unlink(resolve(rootDir, 'test', 'video-4.mp4'));
+  });
+
+  it('should generateSnapshot', async () => {
+    await ffmpeg.generateSnapshot(videoFile, 'test/preview%01d.png');
+    await access(resolve(rootDir, 'test', 'preview1.png'));
+    await access(resolve(rootDir, 'test', 'preview2.png'));
+    await access(resolve(rootDir, 'test', 'preview3.png'));
+    await unlink(resolve(rootDir, 'test', 'preview1.png'));
+    await unlink(resolve(rootDir, 'test', 'preview2.png'));
+    await unlink(resolve(rootDir, 'test', 'preview3.png'));
   });
 });
