@@ -19,6 +19,14 @@ const getResolution = async (
   return { width: Number(width), height: Number(height) };
 };
 
+const getDuration = async (fileOrigin: string): Promise<number> => {
+  const { stdout: duration } = await ffprobe([
+    ' -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1',
+    fileOrigin,
+  ]);
+  return Math.floor(Number(duration));
+};
 ffprobe.getResolution = getResolution;
+ffprobe.getDuration = getDuration;
 
 export default ffprobe;

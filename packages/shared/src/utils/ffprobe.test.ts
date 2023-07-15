@@ -16,4 +16,9 @@ describe('ffprobe', () => {
     assert.strictEqual(width, 3840);
     assert.strictEqual(height, 2160);
   });
+
+  it('should get Duration', async () => {
+    const duration = await ffprobe.getDuration(videoFile);
+    assert.strictEqual(duration, 25);
+  });
 });
