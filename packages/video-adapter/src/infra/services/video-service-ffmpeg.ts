@@ -4,8 +4,33 @@ import type VideoUploaded from '../../domain/entity/video-uploaded.js';
 import VideoFile from '../../domain/value-objects/video-file.js';
 import { Resolution, ffmpeg, ffprobe } from '@devflix/shared';
 import { access } from 'node:fs/promises';
+import Snapshot from '../../domain/value-objects/snapshot.js';
 
 export default class VideoServiceFFMPeg implements VideoService {
+  async getScreenshots(videoUploaded: VideoUploaded): Promise<Snapshot[]> {
+    const { fileInfo } = videoUploaded;
+    await ffmpeg.generateSnapshot(
+      fileInfo.path,
+      fileInfo.path.replace('.mp4', '-preview%01d.png')
+    );
+    const snapshots: Snapshot[] = [];
+
+    const duration = await ffprobe.getDuration(fileInfo.path);
+
+    const numberOfSnapshots = Math.floor(duration / 10) + 1;
+
+    for (let i = 0; i < numberOfSnapshots; i++) {
+      await access(fileInfo.path.replace('.mp4', `-preview${i + 1}.png`));
+      const snapshot = new Snapshot(
+        fileInfo.path.replace('.mp4', `-preview${i + 1}.png`),
+        i * 10
+      );
+      snapshots.push(snapshot);
+    }
+
+    return snapshots;
+  }
+
   async getDifferentResolutions(
     videoUploaded: VideoUploaded
   ): Promise<Map<ResolutionType, VideoFile>> {

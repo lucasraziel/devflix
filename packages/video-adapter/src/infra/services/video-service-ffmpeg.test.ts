@@ -47,4 +47,42 @@ describe('VideoServiceFFMPeg', () => {
     await unlink(path.replace('.mp4', '-medium.mp4'));
     await unlink(path.replace('.mp4', '-small.mp4'));
   });
+
+  it('should get snapshots', async () => {
+    const resolution = new Resolution(3840, 2160);
+    const fileInfo = new FileInfo(
+      'video.mp4',
+      100000,
+      'video/mp4',
+      'mp4',
+      path
+    );
+    const videoServiceFFMPeg = new VideoServiceFFMPeg();
+
+    const video = VideoUploaded.create({
+      durationInSeconds: 25,
+      fileInfo,
+      resolution,
+    });
+
+    const snapshots = await videoServiceFFMPeg.getScreenshots(video);
+
+    assert(snapshots.length === 3, 'should have 3 snapshots');
+    assert(
+      snapshots[0].path === path.replace('.mp4', '-preview1.png'),
+      'should have the same path'
+    );
+    assert(
+      snapshots[1].path === path.replace('.mp4', '-preview2.png'),
+      'should have the same path'
+    );
+    assert(
+      snapshots[2].path === path.replace('.mp4', '-preview3.png'),
+      'should have the same path'
+    );
+
+    await unlink(path.replace('.mp4', '-preview1.png'));
+    await unlink(path.replace('.mp4', '-preview2.png'));
+    await unlink(path.replace('.mp4', '-preview3.png'));
+  });
 });
