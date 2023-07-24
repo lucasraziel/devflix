@@ -11,6 +11,6 @@
   "author": "lucasraziel",
   "license": "GNU AGPLv3",
   "dependencies": {
-    "@devflix/core": "^0.0.1"
+    "@devflix/shared": "^0.0.1"
   }
 }

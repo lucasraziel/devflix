@@ -4,22 +4,22 @@
   "description": "MonoRepo for DevFlix Project",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build && npm run test:core && npm run test:adapter && npm run test:catalog",
+    "test": "npm run build && npm run test:shared && npm run test:adapter && npm run test:catalog",
     "test:catalog": "NODE_V8_COVERAGE=coverage/catalog node --experimental-specifier-resolution=node --experimental-test-coverage --test  packages/video-catalog",
     "test:adapter": "NODE_V8_COVERAGE=coverage/adapter node --experimental-test-coverage --test packages/video-adapter ",
-    "test:core": "NODE_V8_COVERAGE=coverage/core node --experimental-test-coverage --test packages/core ",
+    "test:shared": "NODE_V8_COVERAGE=coverage/shared node --experimental-test-coverage --test packages/shared ",
     "build": "tsc --build",
     "start:video-adapter": "node packages/video-adapter",
     "dev:adapter": "nodemon -e ts --exec \"npm run build && npm run start:video-adapter\"",
     "start:video-catalog": "node packages/video-catalog",
     "dev:catalog": "nodemon -e ts --exec \"npm run build && npm run start:video-catalog\"",
-    "lint": "eslint packages/**/src/**/*.ts  --fix"
+    "lint": "eslint packages/**/src/**/** --no-error-on-unmatched-pattern"
   },
   "keywords": [],
   "author": "lucasraziel",
   "license": "GNU AGPLv3",
   "workspaces": [
-    "packages/core",
+    "packages/shared",
     "packages/video-adapter",
     "packages/video-catalog"
   ],
@@ -34,6 +34,7 @@
     "eslint-config-standard-with-typescript": "^36.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
     "nodemon": "^3.0.1",
