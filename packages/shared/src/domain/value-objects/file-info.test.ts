@@ -9,7 +9,8 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     assert.strictEqual(fileInfo.name, 'video.mp4', 'should have the same name');
     assert.strictEqual(fileInfo.size, 100000, 'should have the same size');
@@ -24,6 +25,11 @@ describe('FileInfo', () => {
       'should have the same extension'
     );
     assert.strictEqual(fileInfo.path, 'path', 'should have the same path');
+    assert.strictEqual(
+      fileInfo.folder,
+      '/folder',
+      'should have the same folder'
+    );
   });
   it('should compare equally file infos with same name, size, mime type, extension and path', () => {
     const fileInfo = new FileInfo(
@@ -31,14 +37,16 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     const fileInfo2 = new FileInfo(
       'video.mp4',
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     assert(fileInfo.equals(fileInfo2), 'should be equal');
   });
@@ -48,14 +56,16 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     const fileInfo2 = new FileInfo(
       'video2.mp4',
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder2'
     );
     assert(!fileInfo.equals(fileInfo2), 'should not be equal');
   });
@@ -65,14 +75,16 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     const fileInfo2 = new FileInfo(
       'video2.mp4',
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     assert(!fileInfo.equals(fileInfo2), 'should not be equal');
   });
@@ -82,14 +94,16 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     const fileInfo2 = new FileInfo(
       'video.mp4',
       200000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     assert(!fileInfo.equals(fileInfo2), 'should not be equal');
   });
@@ -99,14 +113,16 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     const fileInfo2 = new FileInfo(
       'video.mp4',
       100000,
       'video/mp3',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     assert(!fileInfo.equals(fileInfo2), 'should not be equal');
   });
@@ -116,14 +132,16 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     const fileInfo2 = new FileInfo(
       'video.mp4',
       100000,
       'video/mp4',
       'mp3',
-      'path'
+      'path',
+      '/folder'
     );
     assert(!fileInfo.equals(fileInfo2), 'should not be equal');
   });
@@ -133,14 +151,36 @@ describe('FileInfo', () => {
       100000,
       'video/mp4',
       'mp4',
-      'path'
+      'path',
+      '/folder'
     );
     const fileInfo2 = new FileInfo(
       'video.mp4',
       100000,
       'video/mp4',
       'mp4',
-      'path2'
+      'path2',
+      '/folder'
+    );
+    assert(!fileInfo.equals(fileInfo2), 'should not be equal');
+  });
+
+  it('should compare different file infos with different folder', () => {
+    const fileInfo = new FileInfo(
+      'video.mp4',
+      100000,
+      'video/mp4',
+      'mp4',
+      'path',
+      '/folder'
+    );
+    const fileInfo2 = new FileInfo(
+      'video.mp4',
+      100000,
+      'video/mp4',
+      'mp4',
+      'path',
+      '/folder2'
     );
     assert(!fileInfo.equals(fileInfo2), 'should not be equal');
   });
