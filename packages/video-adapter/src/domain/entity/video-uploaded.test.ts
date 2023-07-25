@@ -11,7 +11,8 @@ describe('VideoUploaded', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
 
     const video = VideoUploaded.create({
@@ -42,7 +43,8 @@ describe('VideoUploaded', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
 
     const video = VideoUploaded.create({
@@ -66,7 +68,8 @@ describe('VideoUploaded', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
 
     const video = VideoUploaded.create({
@@ -80,7 +83,8 @@ describe('VideoUploaded', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video2'
+      '/path/to/video2',
+      '/folder'
     );
     video.fileInfo = fileInfo2;
     assert(
@@ -96,7 +100,8 @@ describe('VideoUploaded', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
 
     const video = VideoUploaded.create({

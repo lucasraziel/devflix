@@ -8,6 +8,7 @@ import { assert } from 'console';
 import { ResolutionType } from '../../domain/entity/video-adapted.js';
 
 const path = resolve(RootDir, 'test', 'video.mp4');
+const folder = resolve(RootDir, 'test');
 describe('VideoServiceFFMPeg', () => {
   it('should get different resolutions', async () => {
     const resolution = new Resolution(3840, 2160);
@@ -16,7 +17,8 @@ describe('VideoServiceFFMPeg', () => {
       100000,
       'video/mp4',
       'mp4',
-      path
+      path,
+      folder
     );
     const videoServiceFFMPeg = new VideoServiceFFMPeg();
 
@@ -55,7 +57,8 @@ describe('VideoServiceFFMPeg', () => {
       100000,
       'video/mp4',
       'mp4',
-      path
+      path,
+      folder
     );
     const videoServiceFFMPeg = new VideoServiceFFMPeg();
 
@@ -69,20 +72,20 @@ describe('VideoServiceFFMPeg', () => {
 
     assert(snapshots.length === 3, 'should have 3 snapshots');
     assert(
-      snapshots[0].path === path.replace('.mp4', '-preview1.png'),
+      snapshots[0].path === path.replace('.mp4', '-preview0001.png'),
       'should have the same path'
     );
     assert(
-      snapshots[1].path === path.replace('.mp4', '-preview2.png'),
+      snapshots[1].path === path.replace('.mp4', '-preview0002.png'),
       'should have the same path'
     );
     assert(
-      snapshots[2].path === path.replace('.mp4', '-preview3.png'),
+      snapshots[2].path === path.replace('.mp4', '-preview0003.png'),
       'should have the same path'
     );
 
-    await unlink(path.replace('.mp4', '-preview1.png'));
-    await unlink(path.replace('.mp4', '-preview2.png'));
-    await unlink(path.replace('.mp4', '-preview3.png'));
+    await unlink(path.replace('.mp4', '-preview0001.png'));
+    await unlink(path.replace('.mp4', '-preview0002.png'));
+    await unlink(path.replace('.mp4', '-preview0003.png'));
   });
 });

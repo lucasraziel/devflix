@@ -28,5 +28,6 @@ module.exports = {
     ],
     "rules": {
         "prettier/prettier": "error",
+        "@typescript-eslint/strict-boolean-expressions": "off",
     }
 }

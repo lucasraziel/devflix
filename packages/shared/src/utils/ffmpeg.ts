@@ -1,57 +1,104 @@
-import { promisify } from 'util';
-import { exec as execCb } from 'child_process';
+import ffmpeg from 'fluent-ffmpeg';
+import FFMPEGError from '../errors/ffmpeg-error.js';
 
-const exec = promisify(execCb);
+export default class FFProbe {
+  constructor(private readonly fileOrigin: string) {}
 
-const ffmpeg = async (
-  ffmpegArguments: string[]
-): Promise<{ stdout: string; stderr: string }> =>
-  await exec(`ffmpeg ${ffmpegArguments.join(' ')}`);
+  public getResolution = async (): Promise<{
+    width: number;
+    height: number;
+  }> => {
+    return await new Promise((resolve, reject) => {
+      ffmpeg(this.fileOrigin)
+        .input(this.fileOrigin)
+        .ffprobe((error, metadata) => {
+          if (error) {
+            console.log(error);
+            reject(new FFMPEGError((error as Error).message, { cause: error }));
+            return;
+          }
+          const { width, height } = metadata.streams[0];
+          if (typeof width !== 'number' || typeof height !== 'number') {
+            reject(new FFMPEGError('Invalid resolution'));
+            return;
+          }
+          resolve({ width, height });
+        });
+    });
+  };
 
-const divideBy2 = async (
-  fileOrigin: string,
-  fileDestin: string
-): Promise<{ stdout: string; stderr: string }> =>
-  await ffmpeg([
-    '-i',
-    fileOrigin,
-    '-vf',
-    '"scale=trunc(iw/4)*2:trunc(ih/4)*2"',
-    '-c:a',
-    'copy',
-    fileDestin,
-  ]);
+  public getDurationInSeconds = async (): Promise<number> => {
+    return await new Promise((resolve, reject) => {
+      ffmpeg(this.fileOrigin)
+        .input(this.fileOrigin)
+        .ffprobe((error, metadata) => {
+          if (error) {
+            console.log(error);
+            reject(new FFMPEGError((error as Error).message, { cause: error }));
+            return;
+          }
+          const { duration } = metadata.format;
+          if (typeof duration !== 'number') {
+            reject(new FFMPEGError('Invalid duration'));
+            return;
+          }
+          resolve(duration);
+        });
+    });
+  };
 
-const divideBy4 = async (
-  fileOrigin: string,
-  fileDestin: string
-): Promise<{ stdout: string; stderr: string }> =>
-  await ffmpeg([
-    '-i',
-    fileOrigin,
-    '-vf',
-    '"scale=trunc(iw/8)*2:trunc(ih/8)*2"',
-    '-c:a',
-    'copy',
-    fileDestin,
-  ]);
+  public getDurationInMilisseconds = async (): Promise<number> => {
+    return await new Promise((resolve, reject) => {
+      ffmpeg(this.fileOrigin)
+        .input(this.fileOrigin)
+        .ffprobe((error, metadata) => {
+          if (error) {
+            console.log(error);
+            reject(new FFMPEGError((error as Error).message, { cause: error }));
+            return;
+          }
+          const { duration } = metadata.format;
+          if (typeof duration !== 'number') {
+            reject(new FFMPEGError('Invalid duration'));
+            return;
+          }
+          resolve(duration * 100);
+        });
+    });
+  };
 
-const generateSnapshot = async (
-  fileOrigin: string,
-  namePattern: string
-): Promise<{ stdout: string; stderr: string }> =>
-  await ffmpeg([
-    '-i',
-    fileOrigin,
-    '-vf',
-    "select='not(mod(t\\,10))'",
-    '-vsync',
-    'vfr',
-    namePattern,
-  ]);
+  public resize = async (output: string, size: string): Promise<void> => {
+    await new Promise((resolve, reject) => {
+      ffmpeg(this.fileOrigin)
+        .output(output)
+        .size(size)
+        .on('end', resolve)
+        .on('error', (error) => {
+          console.log(error);
+          reject(new FFMPEGError((error as Error).message, { cause: error }));
+        })
+        .run();
+    });
+  };
 
-ffmpeg.divideBy2 = divideBy2;
-ffmpeg.divideBy4 = divideBy4;
-ffmpeg.generateSnapshot = generateSnapshot;
-
-export default ffmpeg;
+  public generateSnapshots = async (
+    count: number,
+    filename: string,
+    folder: string
+  ): Promise<void> => {
+    await new Promise((resolve, reject) => {
+      ffmpeg(this.fileOrigin)
+        .on('end', resolve)
+        .on('error', (error) => {
+          console.log(error);
+          reject(new FFMPEGError((error as Error).message, { cause: error }));
+        })
+        .screenshots({
+          count,
+          filename,
+          folder,
+          size: '50%',
+        });
+    });
+  };
+}

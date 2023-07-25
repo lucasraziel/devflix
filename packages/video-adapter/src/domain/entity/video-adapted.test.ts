@@ -13,7 +13,8 @@ describe('VideoAdapted', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
     const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
     const video = VideoAdapted.create({
@@ -52,7 +53,8 @@ describe('VideoAdapted', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
     const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
     const video = VideoAdapted.create({
@@ -73,7 +75,8 @@ describe('VideoAdapted', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
     const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
     const video = VideoAdapted.create({
@@ -86,7 +89,8 @@ describe('VideoAdapted', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video2'
+      '/path/to/video2',
+      '/folder'
     );
     video.fileInfo = fileInfo2;
     assert(
@@ -100,7 +104,8 @@ describe('VideoAdapted', () => {
       100000,
       'video/mp4',
       'mp4',
-      '/path/to/video'
+      '/path/to/video',
+      '/folder'
     );
     const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
     const video = VideoAdapted.create({
@@ -123,7 +128,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
       const audioLanguage2 = new AudioLanguage('en', 5, '/path/to/audio2');
@@ -149,7 +155,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
@@ -174,7 +181,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
@@ -203,7 +211,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
@@ -238,7 +247,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const subtitleLanguage = new SubtitleLanguage('en', '/path/to/subtitle');
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
@@ -265,7 +275,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const subtitleLanguage = new SubtitleLanguage('en', '/path/to/subtitle');
@@ -295,7 +306,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const subtitleLanguage = new SubtitleLanguage('en', '/path/to/subtitle');
       const subtitleLanguage2 = new SubtitleLanguage(
@@ -329,7 +341,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const subtitleLanguage = new SubtitleLanguage('en', '/path/to/subtitle');
       const subtitleLanguage2 = new SubtitleLanguage(
@@ -369,7 +382,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
       const video = VideoAdapted.create({
@@ -395,7 +409,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
       const video = VideoAdapted.create({
@@ -421,7 +436,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
       const video = VideoAdapted.create({
@@ -447,7 +463,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const resolution = new Resolution(3840, 2160);
@@ -475,7 +492,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const resolution = new Resolution(3840, 2160);
@@ -507,7 +525,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const resolution = new Resolution(3840, 2160);
@@ -539,7 +558,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const resolution = new Resolution(3840, 2160);
@@ -577,7 +597,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
       const video = VideoAdapted.create({
@@ -601,7 +622,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
@@ -628,7 +650,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');
@@ -650,7 +673,8 @@ describe('VideoAdapted', () => {
         100000,
         'video/mp4',
         'mp4',
-        '/path/to/video'
+        '/path/to/video',
+        '/folder'
       );
 
       const audioLanguage = new AudioLanguage('en', 5, '/path/to/audio');

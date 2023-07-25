@@ -2,27 +2,39 @@ import type VideoService from '../../application/services/video-service.js';
 import { ResolutionType } from '../../domain/entity/video-adapted.js';
 import type VideoUploaded from '../../domain/entity/video-uploaded.js';
 import VideoFile from '../../domain/value-objects/video-file.js';
-import { Resolution, ffmpeg, ffprobe } from '@devflix/shared';
+import { Resolution, ffmpeg as Ffmpeg } from '@devflix/shared';
 import { access } from 'node:fs/promises';
 import Snapshot from '../../domain/value-objects/snapshot.js';
 
 export default class VideoServiceFFMPeg implements VideoService {
   async getScreenshots(videoUploaded: VideoUploaded): Promise<Snapshot[]> {
     const { fileInfo } = videoUploaded;
-    await ffmpeg.generateSnapshot(
-      fileInfo.path,
-      fileInfo.path.replace('.mp4', '-preview%01d.png')
-    );
-    const snapshots: Snapshot[] = [];
 
-    const duration = await ffprobe.getDuration(fileInfo.path);
+    const ffmpegVideo = new Ffmpeg(fileInfo.path);
+
+    const duration = await ffmpegVideo.getDurationInSeconds();
 
     const numberOfSnapshots = Math.floor(duration / 10) + 1;
 
+    await ffmpegVideo.generateSnapshots(
+      numberOfSnapshots,
+      fileInfo.name.replace('.mp4', '-preview%000i.png'),
+      fileInfo.folder
+    );
+    const snapshots: Snapshot[] = [];
+
     for (let i = 0; i < numberOfSnapshots; i++) {
-      await access(fileInfo.path.replace('.mp4', `-preview${i + 1}.png`));
+      await access(
+        fileInfo.path.replace(
+          '.mp4',
+          `-preview${String(i + 1).padStart(4, '0')}.png`
+        )
+      );
       const snapshot = new Snapshot(
-        fileInfo.path.replace('.mp4', `-preview${i + 1}.png`),
+        fileInfo.path.replace(
+          '.mp4',
+          `-preview${String(i + 1).padStart(4, '0')}.png`
+        ),
         i * 10
       );
       snapshots.push(snapshot);
@@ -37,16 +49,18 @@ export default class VideoServiceFFMPeg implements VideoService {
     const resolutions = new Map<ResolutionType, VideoFile>();
     const { fileInfo, resolution } = videoUploaded;
     const videoFile = new VideoFile(fileInfo.path, resolution);
+    const ffmpegVideo = new Ffmpeg(fileInfo.path);
     resolutions.set(ResolutionType.LARGE, videoFile);
     {
-      await ffmpeg.divideBy2(
-        videoFile.path,
-        videoFile.path.replace('.mp4', '-medium.mp4')
+      await ffmpegVideo.resize(
+        videoFile.path.replace('.mp4', '-medium.mp4'),
+        '50%'
       );
       await access(videoFile.path.replace('.mp4', '-medium.mp4'));
-      const { width, height } = await ffprobe.getResolution(
+      const resizedFfmpegVideo = new Ffmpeg(
         videoFile.path.replace('.mp4', '-medium.mp4')
       );
+      const { width, height } = await resizedFfmpegVideo.getResolution();
       resolutions.set(
         ResolutionType.MEDIUM,
         new VideoFile(
@@ -56,14 +70,15 @@ export default class VideoServiceFFMPeg implements VideoService {
       );
     }
     {
-      await ffmpeg.divideBy4(
-        videoFile.path,
+      await ffmpegVideo.resize(
+        videoFile.path.replace('.mp4', '-small.mp4'),
+        '25%'
+      );
+      const resizedFfmpegVideo = new Ffmpeg(
         videoFile.path.replace('.mp4', '-small.mp4')
       );
       await access(videoFile.path.replace('.mp4', '-small.mp4'));
-      const { width, height } = await ffprobe.getResolution(
-        videoFile.path.replace('.mp4', '-small.mp4')
-      );
+      const { width, height } = await resizedFfmpegVideo.getResolution();
       resolutions.set(
         ResolutionType.SMALL,
         new VideoFile(
